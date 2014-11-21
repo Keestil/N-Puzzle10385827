@@ -9,28 +9,32 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.content.Intent;
 
-public class MainActivity extends ActionBarActivity implements OnClickListener{
+public class DifficultyActivity extends ActionBarActivity implements OnClickListener {
 
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_difficulty);
 		
-		Button start_button = (Button) findViewById(R.id.button1);
-		start_button.setOnClickListener(this);
+		Button easy_button = (Button) findViewById(R.id.easy);
+		easy_button.setOnClickListener(this);
 		
-		Button difficulty_button = (Button) findViewById(R.id.button2);
-		difficulty_button.setOnClickListener(this);
+		Button medium_button = (Button) findViewById(R.id.medium);
+		medium_button.setOnClickListener(this);
 		
-		Button leader_button = (Button) findViewById(R.id.button3);
-		leader_button.setOnClickListener(this);
+		Button hard_button = (Button) findViewById(R.id.hard);
+		hard_button.setOnClickListener(this);
+
 	}
-	
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.difficulty, menu);
 		return true;
 	}
 
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -43,20 +47,21 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 	}
 	public void onClick(View v){
 		switch(v.getId()){
-			case R.id.button1:
+			case R.id.easy:
 				Intent intent1 = new Intent(this, ImageActivity.class);
 				startActivity(intent1);
 				break;
 
-			case R.id.button2:
-				Intent intent2 = new Intent(this, DifficultyActivity.class);
+			case R.id.medium:
+				Intent intent2 = new Intent(this, ImageActivity.class);
 				startActivity(intent2);
 				break;
 
-			case R.id.button3:
-				Intent intent3 = new Intent(this, LeaderActivity.class);
+			case R.id.hard:
+				Intent intent3 = new Intent(this, ImageActivity.class);
 				startActivity(intent3);
 				break;							
 		}	
 	}
 }
+

@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="nl.mprog.projects.npuzzle10385827.MainActivity" >
+    tools:context="nl.mprog.projects.npuzzle10385827.MenuActivity" >
 
     <TextView
         android:id="@+id/textView1"
@@ -15,38 +15,35 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:text="@string/Main_menu"
-        android:textAppearance="@style/AppTheme"
+        android:layout_marginTop="87dp"
+        android:text="@string/Menu"
         android:textColor="#00FF00"
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/resetbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/Leaderboards" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:layout_marginTop="20dp"
-        android:text="@string/Start" />
+        android:layout_centerHorizontal="true"
+        android:text="@string/Reset" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/difficultybutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="20dp"
+        android:layout_alignRight="@+id/resetbutton"
+        android:layout_below="@+id/resetbutton"
+        android:layout_marginTop="26dp"
         android:text="@string/Difficulty" />
+
+    <Button
+        android:id="@+id/quitbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/difficultybutton"
+        android:layout_below="@+id/difficultybutton"
+        android:layout_marginTop="29dp"
+        android:text="@string/Quit" />
 
 </RelativeLayout>

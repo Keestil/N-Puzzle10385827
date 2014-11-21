@@ -4,5 +4,32 @@
     <string name="app_name">nPuzzle10385827</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="Main_menu">Main Menu</string>
+    <string name="Start">Start</string>
+    <string name="Difficulty">difficulty</string>
+    <string name="Leaderboards">Leaderboards</string>
+    <string name="title_activity_start">StartActivity</string>
+    <string name="title_activity_difficulty">DifficultyActivity</string>
+    <string name="title_activity_leader">LeaderActivity</string>
+    <string name="Choose_dif">Choose difficulty</string>
+    <string name="Easy">Easy</string>
+    <string name="Medium">Medium</string>
+    <string name="Hard">Hard</string>
+    <string name="title_activity_image">ImageActivity</string>
+    <string name="Choose_image">Choose your image</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="Menu">Menu</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="Reset">Reset</string>
+    <string name="Quit">Quit</string>
+    <string name="My_highscores">My highscores</string>
+    <string name="World_highscores">World highscores</string>
+    <string name="title_activity_image_activity2">ImageActivity2</string>
+    <string name="title_activity_imgae_activity3">ImgaeActivity3</string>
+    <string name="title_activity_image_activity3">ImageActivity3</string>
+    <string name="title_activity_local">LocalActivity</string>
+    <string name="title_activity_world">WorldActivity</string>
+    <string name="title_activity_congrats">CongratsActivity</string>
+    <string name="Winner">You win!</string>
 
 </resources>

@@ -7,46 +7,44 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="nl.mprog.projects.npuzzle10385827.MainActivity" >
+    tools:context="nl.mprog.projects.npuzzle10385827.DifficultyActivity" >
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#00FF00"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:text="@string/Main_menu"
-        android:textAppearance="@style/AppTheme"
-        android:textColor="#00FF00"
-        android:textSize="20sp" />
+        android:text="@string/Choose_dif"
+   		android:textSize="20sp" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@+id/easy"
+        android:layout_below="@+id/easy"
         android:layout_marginTop="20dp"
-        android:text="@string/Leaderboards" />
+        android:text="@string/Medium" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/hard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/medium"
+        android:layout_below="@+id/medium"
+        android:layout_marginTop="20dp"
+        android:text="@string/Hard" />
+
+    <Button
+        android:id="@+id/easy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="20dp"
-        android:text="@string/Start" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:layout_marginTop="20dp"
-        android:text="@string/Difficulty" />
+        android:text="@string/Easy" />
 
 </RelativeLayout>
