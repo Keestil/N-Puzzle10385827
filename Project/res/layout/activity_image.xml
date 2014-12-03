@@ -1,9 +1,6 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
-
     <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+    	xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/puzzle"
@@ -12,45 +9,12 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="nl.mprog.projects.npuzzle10385827.LeaderActivity" >
+        
+        <ListView
+        android:id="@android:id/list"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+    	</ListView>
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/Choose_image"
-            android:textColor="#00FF00"
-            android:textSize="20sp" />
 
-        <ImageButton
-            android:id="@+id/imagefire"
-            android:layout_width="125sp"
-            android:layout_height="125sp"
-            android:layout_below="@+id/textView1"
-            android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/fire_metal" />
-
-        <ImageButton
-            android:id="@+id/imagehawk"
-            android:layout_width="150sp"
-            android:layout_height="100sp"
-            android:layout_below="@+id/imagefire"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="24dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/hawk" />
-
-        <ImageButton
-            android:id="@+id/imagegirl"
-            android:layout_width="100sp"
-            android:layout_height="100sp"
-            android:layout_below="@+id/imagehawk"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="43dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/bikini" />
     </RelativeLayout>
-
-</ScrollView>

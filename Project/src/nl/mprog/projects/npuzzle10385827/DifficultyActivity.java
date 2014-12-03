@@ -49,16 +49,19 @@ public class DifficultyActivity extends ActionBarActivity implements OnClickList
 		switch(v.getId()){
 			case R.id.easy:
 				Intent intent1 = new Intent(this, ImageActivity.class);
+				intent1.putExtra("difficulty",0);
 				startActivity(intent1);
 				break;
 
 			case R.id.medium:
 				Intent intent2 = new Intent(this, ImageActivity.class);
+				intent2.putExtra("difficulty",1);
 				startActivity(intent2);
 				break;
 
 			case R.id.hard:
 				Intent intent3 = new Intent(this, ImageActivity.class);
+				intent3.putExtra("difficulty",2);
 				startActivity(intent3);
 				break;							
 		}	

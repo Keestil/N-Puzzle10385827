@@ -7,9 +7,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.content.Intent;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener{
+	
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,8 +23,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		Button difficulty_button = (Button) findViewById(R.id.button2);
 		difficulty_button.setOnClickListener(this);
 		
-		Button leader_button = (Button) findViewById(R.id.button3);
-		leader_button.setOnClickListener(this);
+		
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -45,6 +46,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		switch(v.getId()){
 			case R.id.button1:
 				Intent intent1 = new Intent(this, ImageActivity.class);
+				intent1.putExtra("difficulty", 1);
 				startActivity(intent1);
 				break;
 
@@ -52,11 +54,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 				Intent intent2 = new Intent(this, DifficultyActivity.class);
 				startActivity(intent2);
 				break;
-
-			case R.id.button3:
-				Intent intent3 = new Intent(this, LeaderActivity.class);
-				startActivity(intent3);
-				break;							
+				
 		}	
 	}
 }
