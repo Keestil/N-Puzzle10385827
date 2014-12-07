@@ -8,14 +8,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class CongratsActivity extends ActionBarActivity implements OnClickListener {
 
+	int moves;
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_congrats);
 		
+		Bundle extras = this.getIntent().getExtras();
+		moves = extras.getInt("Moves");
+		
+		TextView mTextField = (TextView)findViewById(R.id.moves);
+		mTextField.setText("You needed " + moves + " moves");
 		Button menu_button = (Button) findViewById(R.id.menubutton);
 		menu_button.setOnClickListener(this);		
 	}

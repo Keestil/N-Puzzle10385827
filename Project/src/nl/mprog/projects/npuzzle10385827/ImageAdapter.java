@@ -1,8 +1,11 @@
 package nl.mprog.projects.npuzzle10385827;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +16,13 @@ import android.widget.ImageView;
 public class ImageAdapter extends BaseAdapter {
 	
 	private ArrayList<Bitmap> crops;
+	private ArrayList<Integer> ID;
     private Context mContext;
     
-    public ImageAdapter(Context c, ArrayList<Bitmap> crops) {
+    public ImageAdapter(Context c, ArrayList<Bitmap> crops, ArrayList<Integer> ID) {
         mContext = c;
-        this.crops = crops;      
+        this.crops = crops;
+        this.ID = ID;
     }
 
     public int getCount() {
@@ -32,7 +37,8 @@ public class ImageAdapter extends BaseAdapter {
         return 0;
     }
 
-    // create a new ImageView for each item referenced by the Adapter
+ // create a new ImageView for each item referenced by the Adapter
+
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         if (convertView == null) {  // if it's not recycled, initialize some attributes
@@ -43,8 +49,10 @@ public class ImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
-
+        
         imageView.setImageBitmap(crops.get(position));
+        imageView.setTag((ID.get(position)));
         return imageView;
     }
 }
+    

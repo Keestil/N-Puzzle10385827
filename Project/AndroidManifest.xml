@@ -69,6 +69,10 @@
             android:name=".CongratsActivity"
             android:label="@string/title_activity_congrats" >
         </activity>
+        <activity
+            android:name=".SolutionActivity"
+            android:label="@string/title_activity_solution" >
+        </activity>
     </application>
 
 </manifest>

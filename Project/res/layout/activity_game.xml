@@ -9,12 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="nl.mprog.projects.npuzzle10385827.GameActivity" >
 
-    <ImageView
-        android:scaleType="centerCrop"
-		android:id="@+id/single_image"
-		android:layout_width="wrap_content"		
-		android:layout_height="wrap_content"
-		android:layout_gravity="center"/>
     
     <GridView 
     	android:id="@+id/gridview"
@@ -26,23 +20,36 @@
     	android:horizontalSpacing="10dp"
     	android:stretchMode="columnWidth"
     	android:gravity="center"/>
-    
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/gridview"
+        android:layout_alignLeft="@+id/gridview"
+        android:text="TextView"
+        android:textAppearance="@style/AppTheme"
+        android:textColor="#00FF00"
+        android:textSize="20sp" />
+
+
     <Button
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/gridview"
+        android:layout_alignParentRight="true"
         android:text="@string/Menu" />
 
+    <TextView
 
-    <Button
-        android:id="@+id/win"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/menu"
-        android:layout_alignParentRight="true"
-        android:text="@string/Winner" />
+        android:layout_alignLeft="@+id/gridview"
+        android:layout_alignTop="@+id/menu"
+        android:text="Moves : 0"
+        android:textAppearance="@style/AppTheme"
+        android:textColor="#00FF00"/>
 
 </RelativeLayout>

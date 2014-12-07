@@ -31,5 +31,7 @@
     <string name="title_activity_world">WorldActivity</string>
     <string name="title_activity_congrats">CongratsActivity</string>
     <string name="Winner">You win!</string>
+    <string name="title_activity_solution1">Solution1Activity</string>
+    <string name="title_activity_solution">SolutionActivity</string>
 
 </resources>
