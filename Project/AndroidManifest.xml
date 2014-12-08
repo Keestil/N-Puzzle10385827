@@ -73,6 +73,14 @@
             android:name=".SolutionActivity"
             android:label="@string/title_activity_solution" >
         </activity>
+        <activity
+            android:name=".Difficulty2Activity"
+            android:label="@string/title_activity_difficulty2" >
+        </activity>
+        <activity
+            android:name=".GameMenuActivity"
+            android:label="@string/title_activity_game_menu" >
+        </activity>
     </application>
 
 </manifest>

@@ -6,7 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="Main_menu">Main Menu</string>
     <string name="Start">Start</string>
-    <string name="Difficulty">difficulty</string>
+    <string name="Difficulty">Difficulty</string>
     <string name="Leaderboards">Leaderboards</string>
     <string name="title_activity_start">StartActivity</string>
     <string name="title_activity_difficulty">DifficultyActivity</string>
@@ -33,5 +33,7 @@
     <string name="Winner">You win!</string>
     <string name="title_activity_solution1">Solution1Activity</string>
     <string name="title_activity_solution">SolutionActivity</string>
+    <string name="title_activity_difficulty2">Difficulty2Activity</string>
+    <string name="title_activity_game_menu">GameMenuActivity</string>
 
 </resources>

@@ -11,6 +11,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,9 +27,10 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 
 	int resource; // R.drawable.hawk
 	int difficulty;	
-	ArrayList<ImageView> imglist;
 	ArrayList<Integer> ID = new ArrayList<Integer>();
+	ArrayList<Integer> IDshuffle;
 	ArrayList<Bitmap> crops = new ArrayList<Bitmap>();
+	ArrayList<Bitmap> cropsshuffle;
 	GridView grd;
 	int w;
 	int h;
@@ -47,6 +49,7 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		Bundle extras = this.getIntent().getExtras();
+		
 		resource = extras.getInt("Image");
 		difficulty = extras.getInt("difficulty");
 		
@@ -59,6 +62,9 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 	    Bitmap bmp = BitmapFactory.decodeResource(getResources(), resource);
 		divideImages(bmp);
 		getID();
+		
+		IDshuffle = new ArrayList<Integer>(ID);
+		cropsshuffle = new ArrayList<Bitmap>(crops);
 		
 		new CountDownTimer(3000, 1000) {
 			TextView mTextField = (TextView)findViewById(R.id.textView1);			 
@@ -252,11 +258,15 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 	}
 
 	private void shuffle(){
+		for(int i=0;i<crops.size();i++){
+			crops.set(i, cropsshuffle.get(i));
+			ID.set(i,IDshuffle.get(i));
+		}
 		for(int i=0;i<Math.floor((crops.size()-1)/2)+1;i++){
 			Bitmap swapImage = crops.get(i);
 			Integer swapid = ID.get(i);
 			crops.set(i, crops.get(crops.size()-2-i));
-			ID.set(i, ID.get(ID.size()-1-i));
+			ID.set(i, ID.get(ID.size()-2-i));
 			crops.set(crops.size()-2-i, swapImage);
 			ID.set(ID.size()-2-i,swapid);			
 		}
@@ -293,28 +303,47 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.game, menu);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.game, menu);
 		return true;
 	}
 
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);		
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.reset:
+	        	if(timer == true){
+	        		
+	        	}else{
+		            shuffle();
+		            moves = 0;
+		            TextView movesText = (TextView)findViewById(R.id.textView2);
+		            movesText.setText("Moves: " + moves);	        
+	        	}
+
+	            return true;
+	        case R.id.difficulty:
+				Intent intent = new Intent(this, Difficulty2Activity.class);
+				intent.putExtra("Image",resource);
+				startActivity(intent);
+				return true;
+	        case R.id.quit:
+				Intent intent3 = new Intent(this, MainActivity.class);
+				startActivity(intent3);
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
-	
 
 	@Override
 	public void onClick(View v){
 		switch(v.getId()){
 			case R.id.menu:
 				Intent intent1 = new Intent(this, MenuActivity.class);
+				intent1.putExtra("Image",resource);
 				startActivity(intent1);
 				break;	
 		}	

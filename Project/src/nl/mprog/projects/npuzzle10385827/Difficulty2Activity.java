@@ -9,31 +9,33 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class MenuActivity extends ActionBarActivity implements OnClickListener{
-	
+public class Difficulty2Activity extends ActionBarActivity implements OnClickListener {
+
 	int resource;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_menu);
+		setContentView(R.layout.activity_difficulty2);
 		
 		Bundle extras = this.getIntent().getExtras();
 		resource = extras.getInt("Image");
 		
-		Button reset_button = (Button) findViewById(R.id.resetbutton);
-		reset_button.setOnClickListener(this);
+		Button easy_button = (Button) findViewById(R.id.easy);
+		easy_button.setOnClickListener(this);
 		
-		Button difficulty_button = (Button) findViewById(R.id.difficultybutton);
-		difficulty_button.setOnClickListener(this);
+		Button medium_button = (Button) findViewById(R.id.medium);
+		medium_button.setOnClickListener(this);
 		
-		Button quit_button = (Button) findViewById(R.id.quitbutton);
-		quit_button.setOnClickListener(this);
+		Button hard_button = (Button) findViewById(R.id.hard);
+		hard_button.setOnClickListener(this);
+		
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu, menu);
+		getMenuInflater().inflate(R.menu.difficulty2, menu);
 		return true;
 	}
 
@@ -48,24 +50,30 @@ public class MenuActivity extends ActionBarActivity implements OnClickListener{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
 	public void onClick(View v){
 		switch(v.getId()){
-			case R.id.resetbutton:
+			case R.id.easy:
 				Intent intent1 = new Intent(this, GameActivity.class);
+				intent1.putExtra("difficulty",0);
+				intent1.putExtra("Image",resource);
 				startActivity(intent1);
 				break;
 
-			case R.id.difficultybutton:
-				Intent intent2 = new Intent(this, Difficulty2Activity.class);
+			case R.id.medium:
+				Intent intent2 = new Intent(this, GameActivity.class);
+				intent2.putExtra("difficulty",1);
 				intent2.putExtra("Image",resource);
 				startActivity(intent2);
 				break;
 
-			case R.id.quitbutton:
-				Intent intent3 = new Intent(this, MainActivity.class);
+			case R.id.hard:
+				Intent intent3 = new Intent(this, GameActivity.class);
+				intent3.putExtra("difficulty",2);
+				intent3.putExtra("Image",resource);
 				startActivity(intent3);
-				break;
-		}
+				break;							
+		}	
 	}
 }
+		
+
