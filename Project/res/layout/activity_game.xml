@@ -32,23 +32,14 @@
         android:textSize="20sp" />
 
     <TextView
-
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/textView1"
         android:layout_alignLeft="@+id/gridview"
-        android:layout_alignTop="@+id/menu"
         android:text="Moves : 0"
         android:textAppearance="@style/AppTheme"
-        android:textColor="#00FF00"/>
-
-    <Button
-        android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/gridview"
-        android:layout_alignRight="@+id/gridview"
-        android:text="@string/Menu" />
+        android:textColor="#00FF00" />
 
 </RelativeLayout>
 

@@ -2,6 +2,7 @@ package nl.mprog.projects.npuzzle10385827;
 
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +12,10 @@ import android.widget.Button;
 
 public class Difficulty2Activity extends ActionBarActivity implements OnClickListener {
 
+
 	int resource;
+	SharedPreferences data;
+	boolean newgame;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +24,7 @@ public class Difficulty2Activity extends ActionBarActivity implements OnClickLis
 		
 		Bundle extras = this.getIntent().getExtras();
 		resource = extras.getInt("Image");
+		newgame = extras.getBoolean("newgame");
 		
 		Button easy_button = (Button) findViewById(R.id.easy);
 		easy_button.setOnClickListener(this);
@@ -56,6 +61,11 @@ public class Difficulty2Activity extends ActionBarActivity implements OnClickLis
 				Intent intent1 = new Intent(this, GameActivity.class);
 				intent1.putExtra("difficulty",0);
 				intent1.putExtra("Image",resource);
+				intent1.putExtra("newgame",newgame);
+				data = getSharedPreferences("prefdifficulty",0);
+				SharedPreferences.Editor editor0 = data.edit();
+				editor0.putInt("shareddifficulty", 0);
+			    editor0.commit();
 				startActivity(intent1);
 				break;
 
@@ -63,6 +73,11 @@ public class Difficulty2Activity extends ActionBarActivity implements OnClickLis
 				Intent intent2 = new Intent(this, GameActivity.class);
 				intent2.putExtra("difficulty",1);
 				intent2.putExtra("Image",resource);
+				intent2.putExtra("newgame",newgame);
+				data = getSharedPreferences("prefdifficulty",0);
+				SharedPreferences.Editor editor1 = data.edit();
+				editor1.putInt("shareddifficulty", 1);
+				editor1.commit();
 				startActivity(intent2);
 				break;
 
@@ -70,6 +85,11 @@ public class Difficulty2Activity extends ActionBarActivity implements OnClickLis
 				Intent intent3 = new Intent(this, GameActivity.class);
 				intent3.putExtra("difficulty",2);
 				intent3.putExtra("Image",resource);
+				intent3.putExtra("newgame",newgame);
+				data = getSharedPreferences("prefdifficulty",0);
+				SharedPreferences.Editor editor3 = data.edit();
+				editor3.putInt("shareddifficulty", 2);
+				editor3.commit();
 				startActivity(intent3);
 				break;							
 		}	

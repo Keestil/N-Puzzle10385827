@@ -3,28 +3,26 @@ package nl.mprog.projects.npuzzle10385827;
 import java.util.ArrayList;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-public class GameActivity extends ActionBarActivity implements OnClickListener{
+public class GameActivity extends ActionBarActivity{
 	
-
+	SharedPreferences data;
+	String filename = "savedstate";
+	
 	int resource; // R.drawable.hawk
 	int difficulty;	
 	ArrayList<Integer> ID = new ArrayList<Integer>();
@@ -35,6 +33,7 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 	int w;
 	int h;
 	int counter;
+	int counter2;
 	ImageView firstimg;
 	int firstclick;
 	int tag1;
@@ -43,45 +42,79 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 	int moves;
 	int check;
 	boolean timer;
+	boolean newgame;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
-		Bundle extras = this.getIntent().getExtras();
+		data = getSharedPreferences(filename,0);
 		
+		//Import data and save it outside of the class.
+		
+		Bundle extras = this.getIntent().getExtras();		
 		resource = extras.getInt("Image");
 		difficulty = extras.getInt("difficulty");
+		newgame = extras.getBoolean("newgame");
 		
-		w =  getResources().getDisplayMetrics().widthPixels;//bmp.getWidth();
-		h =  getResources().getDisplayMetrics().heightPixels;//bmp.getHeight();	
+		if(newgame == false){
+			resource = data.getInt("sharedpicture", 0);
+			difficulty = data.getInt("shareddifficulty", 0);
+			moves = data.getInt("sharedmoves", 0);
+			counter2 = data.getInt("sharedcounter", 0);
+			
+		}
+		
+		// w = screenwidth and h = screenheight.
+		
+		w =  getResources().getDisplayMetrics().widthPixels;
+		h =  getResources().getDisplayMetrics().heightPixels;
+		
 		
 	    grd = (GridView) findViewById(R.id.gridview);
 	    grd.setAdapter(new ImageAdapter(this,crops,ID));
 
+	    //Turning the image R.drawable into a bitmap.
+	    
 	    Bitmap bmp = BitmapFactory.decodeResource(getResources(), resource);
-		divideImages(bmp);
+		
+	    //Cropping the images and making a ID list that coincide with the cropped images.
+	    
+	    divideImages(bmp);
 		getID();
+		
+		//Save the cropped list and i IDlist the first time we crop them, because we are going to need these lists later on.
 		
 		IDshuffle = new ArrayList<Integer>(ID);
 		cropsshuffle = new ArrayList<Bitmap>(crops);
 		
-		new CountDownTimer(3000, 1000) {
-			TextView mTextField = (TextView)findViewById(R.id.textView1);			 
-			public void onTick(long millisUntilFinished) {
-				timer = true;
-				mTextField.setText("Game starts in: " + millisUntilFinished / 1000);
-			}
+		data = getSharedPreferences(filename,0);
+		
+		//Make a timer timer
+		if(counter2 == 0){
+			counter2++;
+			new CountDownTimer(3000, 1000) {
+				TextView mTextField = (TextView)findViewById(R.id.textView1);			 
+				public void onTick(long millisUntilFinished) {
+				
+					//This boolean is supposed to prevent the player from playing if the timer is clicking.
+				
+					timer = true;
+					mTextField.setText("Game starts in: " + millisUntilFinished / 1000);
+				}
 
-			public void onFinish() {
-				mTextField.setText("Game on!");
-				shuffle();
-				timer = false;
-			}
-		}.start();
+				public void onFinish() {
+					mTextField.setText("Game on!");
+					shuffle();
+					timer = false;
+				}
+			}.start();
+			
+		}else{
+			
+		}
 
 		grd.setOnItemClickListener(new OnItemClickListener() {
-			
 	        @Override
 	        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 	        	if(timer == true){
@@ -90,8 +123,14 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 
 	        	}else{
 	        		counter ++;
+	        		
+	        		//Because difficulty's are 0,1,2 the row/column dimensions are difficulty + 3
+	        		
 	        		size = (int) difficulty + 3;
 	        		TextView movesText = (TextView)findViewById(R.id.textView2);
+	        		
+	        		//Checks if click is even or odd.
+	        		
 	        		if(counter % 2 == 1){
 	        			firstimg = (ImageView) view;
 	        			firstclick = position;
@@ -102,6 +141,9 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 	        			Bitmap swapImage = crops.get(position);
 	        			Integer swapID = ID.get(position);
 	        			tag2 = (int) secondimg.getTag();
+	        			
+	        			//To prevent cheaters to press twice on the same tile we set this if statement.
+	        			
 	        			if (position == firstclick){
 	        				counter = 1;
 	        		
@@ -122,6 +164,7 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 	        			
 	        					//firstimg.setTag(tag2);
 	        					//secondimg.setTag(tag1);
+	        					
 	        					moves ++;
 	        					movesText.setText("Moves: " + moves);
 	        					checkwin2();
@@ -176,17 +219,73 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 	        				movesText.setText("Moves: " + moves);
 	        				checkwin2();
 	        			}
+	        			
+	        			//This usefull command rebuilds the imageviews
+	        			
 	        			grd.invalidateViews();
 	        		}
 	        	}
 	    
 	        }
-	    });
-        //img.setImageResource(resource);
-        
-		Button menu_button = (Button) findViewById(R.id.menu);
-		menu_button.setOnClickListener(this);		
+	    });		
 	}
+	
+	@Override
+	public void onPause() {
+	    super.onPause();// Always call the superclass method first
+	    data = getSharedPreferences(filename,0);
+	    SharedPreferences.Editor editor0 = data.edit();
+	    editor0.putInt("sharedcounter", counter2);	    
+	    editor0.putInt("shareddifficulty", difficulty);
+	    editor0.putInt("sharedmoves", moves);
+	    editor0.putInt("sharedpicture",resource);
+	    editor0.putInt("ID_size", ID.size());
+	
+	   for(int i=0;i<ID.size();i++){
+	        //editor0.remove("ID_"+i);
+	        editor0.putInt("ID_" + i, ID.get(i));  
+	    }
+	    editor0.commit();
+	}
+
+	@Override
+	public void onResume(){
+	    super.onResume();
+	    if(newgame == true){
+	    	
+	    }else{
+	    	data = getSharedPreferences(filename,0);
+	    	int sdifficulty = data.getInt("shareddifficulty", 0);
+	    	int scounter = data.getInt("sharedcounter", 0);
+	    	int smoves = data.getInt("sharedmoves",0);
+	    	int listsize = data.getInt("ID_size", 0);
+	    	int sresource = data.getInt("sharedpicture", 0);
+	    	if(resource == sresource && sdifficulty == difficulty){
+	    		difficulty = sdifficulty;
+	    		resource = sresource;
+	    		moves = smoves;
+	    		counter2 = scounter;
+	    		ID.clear();
+	    		TextView movesText = (TextView)findViewById(R.id.textView2);
+	    		TextView mTextField = (TextView)findViewById(R.id.textView1);
+	    		movesText.setText("Moves: " + moves);
+	    		mTextField.setText("Game on!");
+	    		for(int i=0; i < listsize;i++){
+	    			ID.add(data.getInt("ID_" + i,0));
+	    		}
+	    		crops.clear();
+	    		for(int j=0;j<listsize;j++){
+	    			crops.add(cropsshuffle.get((ID.get(j))));
+	    		}
+	    		SharedPreferences.Editor editor0 = data.edit();
+	    		editor0.putBoolean("game", true);
+	    		editor0.commit();
+	    	}else{
+	    	
+	    	}
+	    }
+	}
+	
 	
 	private void divideImages(Bitmap bmp) {
 		
@@ -327,9 +426,14 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 	        case R.id.difficulty:
 				Intent intent = new Intent(this, Difficulty2Activity.class);
 				intent.putExtra("Image",resource);
+				intent.putExtra("newgame", true);
 				startActivity(intent);
 				return true;
 	        case R.id.quit:
+	        	data = getSharedPreferences(filename,0);
+	    	    SharedPreferences.Editor editor0 = data.edit();
+	    	    editor0.putBoolean("game", true);
+	    	    editor0.commit();
 				Intent intent3 = new Intent(this, MainActivity.class);
 				startActivity(intent3);
 	            return true;
@@ -337,17 +441,5 @@ public class GameActivity extends ActionBarActivity implements OnClickListener{
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
-
-	@Override
-	public void onClick(View v){
-		switch(v.getId()){
-			case R.id.menu:
-				Intent intent1 = new Intent(this, MenuActivity.class);
-				intent1.putExtra("Image",resource);
-				startActivity(intent1);
-				break;	
-		}	
-	}
-	
 }
 

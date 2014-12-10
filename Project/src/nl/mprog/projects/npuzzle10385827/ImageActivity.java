@@ -2,6 +2,7 @@ package nl.mprog.projects.npuzzle10385827;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,8 +10,11 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ImageActivity extends ListActivity {
 
+public class ImageActivity extends ListActivity {
+	
+	//Picture names.
+	
 	String[] itemname ={
 			"assassin",
 			"smile",
@@ -19,6 +23,8 @@ public class ImageActivity extends ListActivity {
 			"fallout",
 			"headphones"
 			};
+	
+	//Pictures i want to use of the folder drawable-mpdi.
 	
 	Integer[] imgid ={
 			R.drawable.assassin,
@@ -29,25 +35,33 @@ public class ImageActivity extends ListActivity {
 			R.drawable.headphones,
 			};
 	
-	int difficulty; 
+	int difficulty;
+	boolean newgame;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_image);
 		
+		//Importing data from main
 		Bundle extras = this.getIntent().getExtras();
 		difficulty = extras.getInt("difficulty");
-		setContentView(R.layout.activity_image);
+		newgame = extras.getBoolean("newgame");
+
+		//Making an adapter and give this adapter the variables itemname and imigid.
 		CustomListAdapter adapter=new CustomListAdapter(this, itemname, imgid);
 		setListAdapter(adapter);
 	}
 	
+	
+	//Listview-method that gives the ID of the image and the difficulty
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 			Intent intent0 = new Intent(this, GameActivity.class);
 			intent0.putExtra("Image", imgid[position]);
 			intent0.putExtra("difficulty", difficulty);
+			intent0.putExtra("newgame",newgame);
 			startActivity(intent0);
 			finish();
 

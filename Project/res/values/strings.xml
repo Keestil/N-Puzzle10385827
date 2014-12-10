@@ -35,5 +35,6 @@
     <string name="title_activity_solution">SolutionActivity</string>
     <string name="title_activity_difficulty2">Difficulty2Activity</string>
     <string name="title_activity_game_menu">GameMenuActivity</string>
+    <string name="Resume">Resume</string>
 
 </resources>

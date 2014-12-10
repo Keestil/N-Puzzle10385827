@@ -16,6 +16,7 @@ public class CustomListAdapter extends BaseAdapter {
 	private String[] itemname;
 	private Integer[] imgid;
 
+	//defining the imported data from ImageActivity
 	public CustomListAdapter(Context context, String[] itemname,
 			Integer[] imgid) {
 		this.context = context;
@@ -23,29 +24,22 @@ public class CustomListAdapter extends BaseAdapter {
 		this.imgid = imgid;
 	}
 
+	//This method shows us the images
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
 		
 		ImageView imageView = new ImageView(context);
 		imageView.setImageResource(imgid[position]);
 		return imageView;
-		
-		/*LayoutInflater inflater = context.getLayoutInflater();
-		View rowView = inflater.inflate(R.layout.my_list, null, true);
-		TextView txtTitle = (TextView) rowView.findViewById(R.id.item);
-		ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-		TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
-		txtTitle.setText(itemname[position]);
-		imageView.setImageResource(imgid[position]);
-		extratxt.setText("Description " + itemname[position]);
-		return rowView;*/
 	}
 
+	//Counts the elements of our listview
 	@Override
 	public int getCount() {
 		return imgid.length;
 	}
 
+	
 	@Override
 	public Object getItem(int position) {
 		return null;
