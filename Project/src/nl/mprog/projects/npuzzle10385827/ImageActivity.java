@@ -10,63 +10,50 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
 public class ImageActivity extends ListActivity {
-	
-	//Picture names.
-	
-	String[] itemname ={
-			"assassin",
-			"smile",
-			"man",
-			"daffy",
-			"fallout",
-			"headphones"
-			};
-	
-	//Pictures i want to use of the folder drawable-mpdi.
-	
-	Integer[] imgid ={
-			R.drawable.assassin,
-			R.drawable.smile,
-			R.drawable.man,
-			R.drawable.daffy,
-			R.drawable.falout,
-			R.drawable.headphones,
-			};
-	
+
+	// Picture names.
+
+	String[] itemname = { "assassin", "smile", "man", "daffy", "fallout",
+			"headphones" };
+
+	// Pictures i want to use of the folder drawable-mpdi.
+
+	Integer[] imgid = { R.drawable.assassin, R.drawable.smile, R.drawable.man,
+			R.drawable.daffy, R.drawable.falout, R.drawable.headphones, };
+
 	int difficulty;
 	boolean newgame;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_image);
-		
-		//Importing data from main
+
+		// Importing data sent from other activities
 		Bundle extras = this.getIntent().getExtras();
 		difficulty = extras.getInt("difficulty");
 		newgame = extras.getBoolean("newgame");
 
-		//Making an adapter and give this adapter the variables itemname and imigid.
-		CustomListAdapter adapter=new CustomListAdapter(this, itemname, imgid);
+		// Making an adapter and give this adapter the variables itemname and
+		// imigid.
+		CustomListAdapter adapter = new CustomListAdapter(this, itemname, imgid);
 		setListAdapter(adapter);
 	}
-	
-	
-	//Listview-method that gives the ID of the image and the difficulty
+
+	// Listview-method that gives the ID of the image and the difficulty
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-			Intent intent0 = new Intent(this, GameActivity.class);
-			intent0.putExtra("Image", imgid[position]);
-			intent0.putExtra("difficulty", difficulty);
-			intent0.putExtra("newgame",newgame);
-			startActivity(intent0);
-			finish();
+		Intent intent0 = new Intent(this, GameActivity.class);
+		intent0.putExtra("Image", imgid[position]);
+		intent0.putExtra("difficulty", difficulty);
+		intent0.putExtra("newgame", newgame);
+		startActivity(intent0);
+		finish();
 
 	}
-			
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -85,5 +72,5 @@ public class ImageActivity extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 }
